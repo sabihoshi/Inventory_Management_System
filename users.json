@@ -1,0 +1,13 @@
+[ {
+  "username" : "hime",
+  "password" : "sama",
+  "isAdmin" : true
+}, {
+  "username" : "sama",
+  "password" : "sama",
+  "isAdmin" : false
+}, {
+  "username" : "admin",
+  "password" : "adminpass",
+  "isAdmin" : false
+} ]

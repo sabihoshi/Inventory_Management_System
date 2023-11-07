@@ -1,0 +1,9 @@
+[ {
+  "id" : 1,
+  "name" : "Keyboard",
+  "quantity" : 1,
+  "description" : "Keychron K8 Pro",
+  "category" : "Peripherals",
+  "isCheckedOut" : false,
+  "checkedOutBy" : null
+} ]
