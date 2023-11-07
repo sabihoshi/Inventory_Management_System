@@ -10,4 +10,8 @@
   "username" : "admin",
   "password" : "adminpass",
   "isAdmin" : false
+}, {
+  "username" : "admin",
+  "password" : "adminpassword",
+  "isAdmin" : false
 } ]

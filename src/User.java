@@ -61,19 +61,4 @@ public class User {
 
         return null;
     }
-
-
-    @JsonIgnore
-    public Item[] getCheckedOutItems() {
-        List<Item> items = Item.getItems();
-        List<Item> checkedOutItems = new ArrayList<>();
-
-        for (Item item : items) {
-            if (item.isCheckedOut && item.checkedOutBy.equals(username)) {
-                checkedOutItems.add(item);
-            }
-        }
-
-        return checkedOutItems.toArray(new Item[0]);
-    }
 }

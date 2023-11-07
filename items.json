@@ -1,9 +1,211 @@
 [ {
   "id" : 1,
-  "name" : "Keyboard",
+  "name" : "Pens",
+  "quantity" : 10,
+  "minimumQuantity" : 5,
+  "description" : "Assorted ballpoint pens",
+  "category" : "Writing Instruments"
+}, {
+  "id" : 2,
+  "name" : "Notebooks",
+  "quantity" : 5,
+  "minimumQuantity" : 2,
+  "description" : "Spiral-bound notebooks with lined paper",
+  "category" : "Paper Products"
+}, {
+  "id" : 3,
+  "name" : "Three-ring binders",
+  "quantity" : 3,
+  "minimumQuantity" : 1,
+  "description" : "Assorted colors and sizes",
+  "category" : "Binders and Folders"
+}, {
+  "id" : 4,
+  "name" : "Crayons",
+  "quantity" : 24,
+  "minimumQuantity" : 10,
+  "description" : "Crayola crayons",
+  "category" : "Art Supplies"
+}, {
+  "id" : 5,
+  "name" : "Staplers and staples",
+  "quantity" : 5,
+  "minimumQuantity" : 3,
+  "description" : "Standard stapler with staples",
+  "category" : "Office Supplies"
+}, {
+  "id" : 6,
+  "name" : "Backpacks",
+  "quantity" : 2,
+  "minimumQuantity" : 1,
+  "description" : "School backpacks with multiple compartments",
+  "category" : "Backpacks and Bags"
+}, {
+  "id" : 7,
+  "name" : "Whiteboards and markers",
+  "quantity" : 5,
+  "minimumQuantity" : 1,
+  "description" : "Small whiteboard with markers and eraser",
+  "category" : "Classroom Tools"
+}, {
+  "id" : 8,
+  "name" : "Planners and calendars",
   "quantity" : 1,
-  "description" : "Keychron K8 Pro",
-  "category" : "Peripherals",
-  "isCheckedOut" : false,
-  "checkedOutBy" : null
+  "minimumQuantity" : 1,
+  "description" : "Academic planner with monthly and weekly views",
+  "category" : "Organizational Tools"
+}, {
+  "id" : 9,
+  "name" : "USB drives",
+  "quantity" : 2,
+  "minimumQuantity" : 1,
+  "description" : "16GB USB flash drives",
+  "category" : "Technology Accessories"
+}, {
+  "id" : 10,
+  "name" : "Textbooks",
+  "quantity" : 5,
+  "minimumQuantity" : 3,
+  "description" : "Various textbooks for different subjects",
+  "category" : "Educational Materials"
+}, {
+  "id" : 11,
+  "name" : "Calculators",
+  "quantity" : 15,
+  "minimumQuantity" : 5,
+  "description" : "Scientific calculators for advanced math",
+  "category" : "Math Tools"
+}, {
+  "id" : 12,
+  "name" : "Glue ",
+  "quantity" : 26,
+  "minimumQuantity" : 2,
+  "description" : "Non-toxic glue sticks for crafts and paper",
+  "category" : "Art Supplies"
+}, {
+  "id" : 13,
+  "name" : "Rulers",
+  "quantity" : 25,
+  "minimumQuantity" : 5,
+  "description" : "12-inch plastic rulers, transparent",
+  "category" : "Measuring Tools"
+}, {
+  "id" : 14,
+  "name" : "Scissos",
+  "quantity" : 5,
+  "minimumQuantity" : 4,
+  "description" : "Safety scissors with rounded tips",
+  "category" : "Art Supplies"
+}, {
+  "id" : 15,
+  "name" : "Highlighters",
+  "quantity" : 40,
+  "minimumQuantity" : 10,
+  "description" : "Assorted colors, chisel tip highlighters",
+  "category" : "Writing Instruments"
+}, {
+  "id" : 16,
+  "name" : "Sticky notes",
+  "quantity" : 50,
+  "minimumQuantity" : 20,
+  "description" : "3x3 inch sticky notes, various colors",
+  "category" : "Office Supplies"
+}, {
+  "id" : 17,
+  "name" : "Index cards",
+  "quantity" : 100,
+  "minimumQuantity" : 50,
+  "description" : "Blank index cards, 3x5 inches",
+  "category" : "Paper Products"
+}, {
+  "id" : 18,
+  "name" : "Tape dispensers",
+  "quantity" : 10,
+  "minimumQuantity" : 3,
+  "description" : "Desktop tape dispensers with clear tape",
+  "category" : "Office Supplies"
+}, {
+  "id" : 19,
+  "name" : "File folders",
+  "quantity" : 100,
+  "minimumQuantity" : 25,
+  "description" : "Manila file folders, letter size",
+  "category" : "Binders and Folders"
+}, {
+  "id" : 20,
+  "name" : "Binder clips",
+  "quantity" : 200,
+  "minimumQuantity" : 50,
+  "description" : "Assorted sizes, black binder clips",
+  "category" : "Office Supplies"
+}, {
+  "id" : 21,
+  "name" : "Envelopes",
+  "quantity" : 500,
+  "minimumQuantity" : 100,
+  "description" : "White business envelopes, self-sealing",
+  "category" : "Mailroom Supplies"
+}, {
+  "id" : 22,
+  "name" : "Desk organizers",
+  "quantity" : 10,
+  "minimumQuantity" : 2,
+  "description" : "Wooden desk organizers with multiple compartments",
+  "category" : "Organizational Tools"
+}, {
+  "id" : 23,
+  "name" : "Computer mice",
+  "quantity" : 8,
+  "minimumQuantity" : 2,
+  "description" : "Wireless optical mice",
+  "category" : "Technology Accessories"
+}, {
+  "id" : 24,
+  "name" : "Keyboards",
+  "quantity" : 8,
+  "minimumQuantity" : 2,
+  "description" : "Ergonomic USB keyboards",
+  "category" : "Technology Accessories"
+}, {
+  "id" : 26,
+  "name" : "Desk lamps",
+  "quantity" : 15,
+  "minimumQuantity" : 4,
+  "description" : "LED desk lamps with adjustable arms",
+  "category" : "Office Furnishings"
+}, {
+  "id" : 27,
+  "name" : "Bookends",
+  "quantity" : 20,
+  "minimumQuantity" : 5,
+  "description" : "Metal bookends, heavy-duty",
+  "category" : "Office Furnishings"
+}, {
+  "id" : 28,
+  "name" : "Watercolor paints",
+  "quantity" : 25,
+  "minimumQuantity" : 5,
+  "description" : "Watercolor paint sets with brushes",
+  "category" : "Art Supplies"
+}, {
+  "id" : 29,
+  "name" : "USB-C adapters",
+  "quantity" : 15,
+  "minimumQuantity" : 4,
+  "description" : "USB-C to USB-A adapters",
+  "category" : "Technology Accessories"
+}, {
+  "id" : 30,
+  "name" : "Headphones",
+  "quantity" : 10,
+  "minimumQuantity" : 3,
+  "description" : "Noise-cancelling headphones",
+  "category" : "Technology Accessories"
+}, {
+  "id" : 31,
+  "name" : "Pencils",
+  "quantity" : 7,
+  "minimumQuantity" : 3,
+  "description" : "Assorted pencils",
+  "category" : "Writing Instruments"
 } ]

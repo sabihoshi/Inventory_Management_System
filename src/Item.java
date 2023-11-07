@@ -12,10 +12,9 @@ public class Item {
     public int id;
     public String name;
     public int quantity;
+    public int minimumQuantity;
     public String description;
     public String category;
-    public boolean isCheckedOut;
-    public String checkedOutBy;
 
     /**
      * Retrieves the items from the "items.json" file.
@@ -69,24 +68,59 @@ public class Item {
     }
 
     public static void printItem(Item item) {
-        printItems(List.of(item));
+        System.out.println();
+        System.out.println("+--------------+");
+        System.out.println("| Item Details |");
+        System.out.println("+--------------+");
+        System.out.println();
+
+        System.out.println();
+        System.out.printf("+--------------------------------------------------------------+%n");
+        System.out.printf("|               ID: %-42d |%n", item.id);
+        System.out.printf("|             Name: %-42s |%n", item.name);
+        System.out.printf("|      Description: %-42s |%n", item.description);
+        System.out.printf("|         Quantity: %-42d |%n", item.quantity);
+        System.out.printf("|         Category: %-42s |%n", item.category);
+        System.out.printf("| Minimum Quantity: %-42d |%n", item.minimumQuantity);
+        System.out.printf("+--------------------------------------------------------------+%n");
+        System.out.println();
     }
 
+    /**
+     * Prints the details of the items in a collection.
+     *
+     * @param items the collection of items to be printed
+     */
     public static void printItems(Collection<Item> items) {
-        String leftAlignFormat = "| %-5s | %-15s | %-20s | %-10d | %-15s | %-20s |%n";
+        Collection<Item> lowStocks = items.stream()
+                .filter(item -> item.quantity <= item.minimumQuantity)
+                .toList();
 
-        System.out.format("+-------+-----------------+----------------------+------------+-----------------+----------------------+%n");
-        System.out.format("| Id    | Name            | Description          | Quantity   | Category        | Checked Out By       |%n");
-        System.out.format("+-------+-----------------+----------------------+------------+-----------------+----------------------+%n");
+        if (!lowStocks.isEmpty()) {
+            System.out.println("!! Low Stocks !!");
+            String lowStocksFormat = "| %-5s | %-25s | %-30s | %-10d | %-10d | %-25s |%n";
+            System.out.printf("+-------+---------------------------+--------------------------------+------------+------------+---------------------------+%n");
+            System.out.printf("| Id    | Name                      | Description                    | Quantity   | Minimum    | Category                  |%n");
+            System.out.printf("+-------+---------------------------+--------------------------------+------------+------------+---------------------------+%n");
+            for (Item item : lowStocks) {
+                String description = item.description.length() > 30 ? item.description.substring(0, 27) + "..." : item.description;
+                System.out.format(lowStocksFormat, item.id, item.name, description, item.quantity, item.minimumQuantity, item.category);
+            }
+            System.out.printf("+-------+---------------------------+--------------------------------+------------+------------+---------------------------+%n");
+            System.out.println("!! Low Stocks !!");
 
-        for (Item item : items) {
-            // If the description is longer than 20 characters, truncate it and add "..." to the end.
-            String description = item.description.length() > 20 ? item.description.substring(0, 17) + "..." : item.description;
-            String name = item.checkedOutBy == null ? "N/A" : item.checkedOutBy;
-            System.out.format(leftAlignFormat, item.id, item.name, description, item.quantity, item.category, name);
+            System.out.println();
+            System.out.println();
         }
-
-        System.out.format("+-------+-----------------+----------------------+------------+-----------------+----------------------+%n");
+        String leftAlignFormat = "| %-5s | %-25s | %-30s | %-10d | %-25s |%n";
+        System.out.printf("+-------+---------------------------+--------------------------------+------------+---------------------------+%n");
+        System.out.printf("| Id    | Name                      | Description                    | Quantity   | Category                  |%n");
+        System.out.printf("+-------+---------------------------+--------------------------------+------------+---------------------------+%n");
+        for (Item item : items) {
+            String description = item.description.length() > 30 ? item.description.substring(0, 27) + "..." : item.description;
+            System.out.format(leftAlignFormat, item.id, item.name, description, item.quantity, item.category);
+        }
+        System.out.printf("+-------+---------------------------+--------------------------------+------------+---------------------------+%n");
     }
 
     /**
@@ -105,40 +139,6 @@ public class Item {
         }
 
         return null;
-    }
-
-    /**
-     * Retrieves an item with the specified name.
-     *
-     * @param name the name of the item to retrieve
-     * @return the item with the specified name, or null if no item is found
-     */
-    public static Item getItem(String name) {
-        List<Item> items = getItems();
-        List<Item> itemsWithName = new ArrayList<>();
-
-        for (Item item : items) {
-            if (item.name.toLowerCase().contains(name.toLowerCase())) {
-                itemsWithName.add(item);
-            }
-        }
-
-        if (items.isEmpty()) return null;
-        if (items.size() == 1) return items.get(0);
-
-        printItems(itemsWithName);
-        System.out.println();
-        while (true) {
-            System.out.print("Multiple items with same name found. Enter ID: ");
-            String id = Main.scanner.nextLine();
-
-            Item item = getItem(Integer.parseInt(id));
-            if (item != null) return item;
-
-            System.out.println("Invalid ID. Press enter to try again.");
-            Main.scanner.nextLine();
-            System.out.println();
-        }
     }
 }
 

@@ -9,8 +9,13 @@ public class Main {
     public static final ObjectMapper mapper = new ObjectMapper();
     public static User loggedInUser;
 
+
     public static void main(String[] args) {
         while (true) {
+
+
+            System.out.println();
+            System.out.println();
             System.out.println("Inventory Management System");
 
             System.out.println("[1] Login");
@@ -33,11 +38,12 @@ public class Main {
                     loggedInUser = User.getUser(username, password);
                     if (loggedInUser == null) {
                         System.out.println("Invalid username or password.");
-                    } else if (loggedInUser.isAdmin) {
-                        adminMenu();
-                    } else {
-                        userMenu();
+                        break;
                     }
+
+                    System.out.println();
+                    System.out.println();
+                    userMenu();
                     break;
                 }
                 case 2: {
@@ -77,72 +83,138 @@ public class Main {
 
     private static void userMenu() {
         while (true) {
-            System.out.println("1. View Items");
-            System.out.println("2. Checkout Item");
-            System.out.println("3. Return Item");
-            System.out.println("4. Back");
+            System.out.println("[1] View inventory");
+            System.out.println("[2] View item details");
+            System.out.println("[3] Edit item details");
+            System.out.println("[4] Manage stock quantity");
+            System.out.println();
+            System.out.println("[5] Add new item");
+            System.out.println("[6] Remove item");
+            System.out.println();
+            System.out.println("[0] Back");
             System.out.println();
 
             System.out.print("Enter your choice: ");
             try {
                 int choice = scanner.nextInt();
                 scanner.nextLine();
+
+                System.out.println();
+                System.out.println();
                 switch (choice) {
-                    case 1:
-                        List<Item> items = Item.getItems();
-                        Item.printItems(items);
+                    case 1: {
+                        System.out.println("View Inventory");
+                        Item.printItems(Item.getItems());
                         break;
-                    case 2:
-                        System.out.println("Checkout Item");
+                    }
+                    case 2: {
+                        System.out.println("View Item");
+                        Item.printItems(Item.getItems());
 
-                        System.out.print("Enter name: ");
-                        String name = scanner.nextLine();
+                        System.out.print("Enter item ID to view details: ");
+                        int id = scanner.nextInt();
+                        scanner.nextLine();
 
-                        Item item = Item.getItem(name);
+                        Item item = Item.getItem(id);
                         if (item == null) {
                             System.out.println("Item not found.");
                             break;
                         }
 
-                        if (item.isCheckedOut) {
-                            System.out.println("Item is already checked out.");
+                        Item.printItem(item);
+                        break;
+                    }
+                    case 3: {
+                        Item.printItems(Item.getItems());
+
+                        System.out.println();
+                        System.out.println();
+                        System.out.println("Update Item");
+                        System.out.println();
+
+                        System.out.print("Enter item ID: ");
+                        int id = scanner.nextInt();
+                        scanner.nextLine();
+
+                        Item item = Item.getItem(id);
+                        if (item == null) {
+                            System.out.println("Item not found.");
                             break;
                         }
 
-                        item.isCheckedOut = true;
+                        Item.printItem(item);
+
+                        System.out.println();
+                        System.out.println("Note: Leave blank if you do not want to update the field.");
+                        System.out.print("Enter new item name: ");
+                        String newName = scanner.nextLine();
+
+                        System.out.println();
+                        System.out.println("Note: Leave blank if you do not want to update the field.");
+                        System.out.print("Enter new item description: ");
+                        String newDescription = scanner.nextLine();
+
+                        System.out.println();
+                        System.out.println("Note: Leave blank if you do not want to update the field.");
+                        System.out.print("Enter new item category: ");
+                        String newCategory = scanner.nextLine();
+
+                        System.out.println();
+                        System.out.print("Enter new item minimum quantity: ");
+                        int newMinimumQuantity = scanner.nextInt();
+                        scanner.nextLine();
+
+                        item.name = newName.isBlank() ? item.name : newName;
+                        item.description = newDescription.isBlank() ? item.description : newDescription;
+                        item.category = newCategory.isBlank() ? item.category : newCategory;
+                        item.minimumQuantity = newMinimumQuantity;
+
+                        Item.saveItems();
+                        Item.printItem(item);
+
+                        System.out.println();
+                        System.out.println("Item updated successfully.");
+                        System.out.println("Press enter to continue.");
+                        scanner.nextLine();
 
                         break;
-                    case 3:
-                        System.out.println("Return Item");
-                        break;
-                    case 4:
-                        System.out.println("Exit");
-                        return;
-                    default:
-                        System.out.println("Invalid Input");
-                        break;
-                }
-            } catch (Exception e) {
-                System.out.println("Invalid Input");
-            }
-        }
-    }
+                    }
+                    case 4: {
+                        Item.printItems(Item.getItems());
 
-    private static void adminMenu() {
-        while (true) {
-            System.out.println("1. Add Item");
-            System.out.println("2. Remove Item");
-            System.out.println("3. Update Item");
-            System.out.println("4. View Items");
-            System.out.println("5. Back");
-            System.out.println();
+                        System.out.println();
+                        System.out.println();
+                        System.out.println("Manage Stock Quantity");
+                        System.out.println();
 
-            System.out.print("Enter your choice: ");
-            try {
-                int choice = scanner.nextInt();
-                scanner.nextLine();
-                switch (choice) {
-                    case 1: {
+                        System.out.print("Enter item ID to manage stock quantity: ");
+                        int id = scanner.nextInt();
+                        scanner.nextLine();
+
+                        Item item = Item.getItem(id);
+                        if (item == null) {
+                            System.out.println("Item not found.");
+                            break;
+                        }
+
+                        Item.printItem(item);
+
+                        System.out.print("Enter new stock quantity: ");
+                        int newQuantity = scanner.nextInt();
+                        scanner.nextLine();
+
+                        item.quantity = newQuantity;
+
+                        Item.saveItems();
+                        Item.printItem(item);
+
+                        System.out.println();
+                        System.out.println("Stock quantity updated successfully.");
+                        System.out.println("Press enter to continue.");
+                        scanner.nextLine();
+                        break;
+                    }
+                    case 5: {
                         System.out.println("Add Item");
 
                         System.out.print("Enter item name: ");
@@ -155,6 +227,10 @@ public class Main {
                         int quantity = scanner.nextInt();
                         scanner.nextLine();
 
+                        System.out.print("Enter item minimum quantity: ");
+                        int minimumQuantity = scanner.nextInt();
+                        scanner.nextLine();
+
                         System.out.print("Enter item category: ");
                         String category = scanner.nextLine();
 
@@ -164,21 +240,30 @@ public class Main {
                         item.name = name;
                         item.description = description;
                         item.quantity = quantity;
+                        item.minimumQuantity = minimumQuantity;
                         item.category = category;
 
                         List<Item> items = Item.getItems();
                         items.add(item);
                         Item.saveItems();
 
+                        Item.printItem(item);
+
+                        System.out.println();
+                        System.out.println("Item added successfully.");
+                        System.out.println("Press enter to continue.");
+                        scanner.nextLine();
+
                         break;
                     }
-                    case 2: {
+                    case 6: {
                         System.out.println("Remove Item");
 
-                        System.out.print("Enter item name to remove: ");
-                        String name = scanner.nextLine();
+                        System.out.print("Enter item ID to remove: ");
+                        int id = scanner.nextInt();
+                        scanner.nextLine();
 
-                        Item item = Item.getItem(name);
+                        Item item = Item.getItem(id);
 
                         if (item == null) {
                             System.out.println("Item not found.");
@@ -201,61 +286,18 @@ public class Main {
 
                         break;
                     }
-                    case 3: {
-                        System.out.println("Update Item");
-
-                        System.out.print("Enter item name to update: ");
-                        String name = scanner.nextLine();
-
-                        Item item = Item.getItem(name);
-                        if (item == null) {
-                            System.out.println("Item not found.");
-                            break;
-                        }
-
-                        Item.printItem(item);
-
-                        System.out.print("Enter new item name: ");
-                        String newName = scanner.nextLine();
-
-                        System.out.print("Enter new item description: ");
-                        String newDescription = scanner.nextLine();
-                        System.out.print("Enter new item quantity: ");
-                        int newQuantity = scanner.nextInt();
-
-                        System.out.print("Enter new item category: ");
-                        String newCategory = scanner.nextLine();
-
-                        item.name = newName;
-                        item.description = newDescription;
-                        item.quantity = newQuantity;
-                        item.category = newCategory;
-
-
-                        break;
-                    }
-                    case 4: {
-                        System.out.println("View Item");
-                        Item.printItems(Item.getItems());
-
-                        System.out.print("Enter item ID to view details: ");
-                        int id = scanner.nextInt();
-                        scanner.nextLine();
-
-                        Item item = Item.getItem(id);
-                        Item.printItem(item);
-                        break;
-                    }
-                    case 5:
+                    case 0: {
                         return;
-                    default: {
+                    }
+                    default:
                         System.out.println("Invalid Input");
                         break;
-                    }
                 }
             } catch (Exception e) {
                 System.out.println("Invalid Input");
             }
+            System.out.println();
+            System.out.println();
         }
     }
 }
