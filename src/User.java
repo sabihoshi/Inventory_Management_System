@@ -1,19 +1,23 @@
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
 
 public class User {
-    private static List<User> users;
+    private static LinkedList<User> users;
     public String username;
     public String password;
     public boolean isAdmin;
 
-    public static List<User> getUsers() {
+    /**
+     * Retrieves the list of users from a JSON file.
+     * If the list of users has already been loaded, it returns the cached value.
+     * If the file cannot be read, an empty list is returned.
+     *
+     * @return The list of users.
+     */
+    public static LinkedList<User> getUsers() {
         if (users != null) return users;
 
         try {
@@ -21,10 +25,15 @@ public class User {
             return users = Main.mapper.readValue(file, new TypeReference<>() {
             });
         } catch (IOException e) {
-            return users = new ArrayList<>();
+            return users = new LinkedList<>();
         }
     }
 
+    /**
+     * Saves the list of users to a JSON file.
+     *
+     * @throws RuntimeException if there are no users to save or if the users file cannot be written.
+     */
     public static void saveUsers() {
         if (users == null) throw new RuntimeException("Tried saving, but there are no users to save.");
 
@@ -38,23 +47,18 @@ public class User {
         }
     }
 
+    /**
+     * Retrieves a user based on the provided username and password.
+     *
+     * @param username The username of the user.
+     * @param password The password of the user.
+     * @return The user object if found, else null.
+     */
     public static User getUser(String username, String password) {
-        List<User> users = User.getUsers();
+        LinkedList<User> users = User.getUsers();
 
         for (User user : users) {
             if (user.username.equalsIgnoreCase(username) && user.password.equals(password)) {
-                return user;
-            }
-        }
-
-        return null;
-    }
-
-    public static User getUser(String username) {
-        List<User> users = User.getUsers();
-
-        for (User user : users) {
-            if (user.username.equalsIgnoreCase(username)) {
                 return user;
             }
         }
